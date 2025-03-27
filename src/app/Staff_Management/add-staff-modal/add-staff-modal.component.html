@@ -1,0 +1,22 @@
+<div class="edit-modal-container">
+    <div class="modal-header">
+        <span>Trainer Registeration</span>
+        <button (click)="closeModal()" title="Close">X</button>
+    </div>
+    <div class="modal-body">
+        <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+            <label>Name</label>
+            <input type="text" id="name" name="name" ngModel required><br>
+            <label>Position</label>
+            <input type="text" name="position"  ngModel required><br>
+            <label>Contact</label>
+            <input type="text" name="contactNumber"  ngModel required><br>
+            <label>Current Month Leave(s)</label>
+            <input type="number" name="monthLeaves" min=0 max=25 ngModel><br>
+            <label>Annual Leave(s)</label>
+            <input type="number" name="annualLeaves" min=0 max=25  ngModel><br>
+
+            <button type="submit" [disabled]="!myForm.valid">Submit</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="header">
+    <div>
+        <button style="font-size: 24px;font-weight: 600;margin-right: 10px;" (click)="back()">◄</button>
+        <span class="headerText">Staff Management</span>
+    </div>
+    <button (click)="toggleCreateModal()">Register New Staff</button>
+</div>
+<div class="cardContainer">
+    @for (item of staffData; track $index) {
+    <app-staff-card [staffData]="item" (deleteTrainerEvent)="deleteTrainer($index)"
+        (editClickEvent)="toggleEditModal($event)"></app-staff-card>
+    } @empty {
+        <h1>Oops...Something went wrong!</h1>
+    }
+</div>
+
+@if (isEditModalVisible) {
+    <div>
+        <app-edit-staff-modal (modalCloseEvent)="toggleEditModal({})" [trainerData]="trainerData"></app-edit-staff-modal>
+    </div>
+}
+
+@if (isCreateModalVisible) {
+    <div>
+        <app-add-staff-modal (modalCloseEvent)="toggleCreateModal()"></app-add-staff-modal>
+    </div>
+}

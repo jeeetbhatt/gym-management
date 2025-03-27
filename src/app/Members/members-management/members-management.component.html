@@ -1,0 +1,19 @@
+<div class="header">
+    <div>
+        <button style="font-size: 24px;font-weight: 600;margin-right: 10px;" (click)="back()" title="Go Back">◄</button>
+        <span class="headerText">Gym Membership Management</span>
+    </div>
+    <button (click)="setActiveItemId(1)" title="Click to register new staff member">Register New Staff</button>
+</div>
+<div class="main">
+    <app-left-header-panel [data]="leftData" [activeItemId]="activeItemId" (activeItemChanged)="setActiveItemId($event)"></app-left-header-panel>
+    @if (activeItemId == 0) {
+        <app-all-members-listing (editButtonClicked)="initEditUser($event)"></app-all-members-listing>
+    } @else if (activeItemId == 1) {
+        <app-register-member></app-register-member>
+    } @else if (activeItemId == 2) {
+        <app-all-members-listing [filterFormer]="true"></app-all-members-listing>
+    } @else if (activeItemId == 3) {
+        <app-edit-member [editMemberId]="editMemberId" (allMembersBtnClicked)="setActiveItemId(0)"></app-edit-member>
+    }
+</div>

@@ -1,0 +1,68 @@
+<div class="header" [title]="this.allMembers.length + ' Members'">
+    <h3>All Gym Members - {{ this.allMembers.length }} </h3>
+</div>
+<div class="main">
+    <div class="search-box">
+        <input type="search" name="search" id="searchBox" placeholder="Search for a member" (input)="searchMembers()"
+            [(ngModel)]="searchMemberKey" aria-label="Search Users">
+    </div>
+
+    <div *ngIf="!filterFormer" class="filters">
+        <button class="tabs" title="Filter users with Expired Subscription">Expired</button>
+        <button class="tabs" title="Filter users wjose Subscription is about to expire.">Expiring Soon</button>
+        <select name="" id="" [(ngModel)]="filterGoal" (change)="filterMembers()">
+            <option value="" selected>--Goal--</option>
+            <option value="Fat Loss">Fat Loss</option>
+            <option value="Weight Gain">Weight Gain</option>
+            <option value="Body Building">Body Buiding</option>
+        </select>
+
+        <select id="filterLevel" name="filterLevel" [(ngModel)]="filterLevel" (change)="filterByLevel()">
+            <option value="" selected>--Level--</option>
+            <option value="Learner">Learner</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Expert">Expert</option>
+        </select>
+
+    </div>
+
+    <table class="all-members-listing">
+        <tr class="members-listing-header">
+            <td> Controls </td>
+            <td> Name </td>
+            <td> Contact Number </td>
+            <td> Address </td>
+            <td *ngIf="!filterFormer"> Physique Goal </td>
+            <td *ngIf="!filterFormer"> Expertise Level </td>
+            <td *ngIf="filterFormer"> Left Gym </td>
+            <td> Trainer </td>
+            <td> Joining Date </td>
+            <td> Subscription End Date </td>
+            <td> Payment Remark </td>
+            <td> Remarks </td>
+        </tr>
+
+        @for (item of this.allMembers; track $index) {
+        <tr class="member-container">
+            <td>
+                <button title="Edit User" (click)="editMember(item.id)">✏️</button>
+                <button title="Deactive User" (click)="deactivateMember(item.id)">❌</button>
+            </td>
+            <td [title]="item.name"><span> {{ item.name }} </span></td>
+            <td [title]="item.contactNumber"><span> {{ item.contactNumber }} </span></td>
+            <td [title]="item.address"><span> {{ item.address }} </span></td>
+            <td [title]="item.physiqueGoal" *ngIf="!filterFormer"><span> {{ item.physiqueGoal }} </span></td>
+            <td [title]="item.expertiseLevel" *ngIf="!filterFormer"><span> {{ item.expertiseLevel }} </span></td>
+            <td [title]="item.leftGymDate" *ngIf="filterFormer"><span> {{ item.leftGymDate }} </span></td>
+            <td [title]="item.trainer"><span> {{ item.trainer }} </span></td>
+            <td [title]="item.joiningDate"><span> {{ item.joiningDate }} </span></td>
+            <td [title]="item.subscriptionEndDate"><span> {{ item.subscriptionEndDate }} </span></td>
+            <td [title]="item.paymentRemark"><span> {{ item.paymentRemark }} </span></td>
+            <td [title]="item.remarks"><span> {{ item.remarks }} </span></td>
+        </tr>
+        } @empty {
+        <h1>No Members to Display!</h1>
+        }
+    </table>
+</div>

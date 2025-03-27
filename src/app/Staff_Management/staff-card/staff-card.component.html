@@ -1,0 +1,12 @@
+<div class="cardContainer">
+    <div class="card">
+        <span> {{ staffData.name | titlecase}} </span>
+        <button (click)="editTrainer()">Edit</button>
+        <button (click)="deleteTrainer(1)">Delete</button>
+        <hr>
+        <span> {{ staffData.position | titlecase}} </span><br>
+        <span> {{ staffData.contactNumber }} </span><br>
+        <span> Current Month Leave(s): {{ staffData.monthLeaves }} </span><br>
+        <span> Annual Leave(s): {{ staffData.annualLeaves }} </span>
+    </div>
+</div>

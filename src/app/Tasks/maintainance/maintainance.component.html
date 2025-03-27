@@ -1,0 +1,21 @@
+<div class="header">
+    <div>
+        <button style="font-size: 24px;font-weight: 600;margin-right: 10px;" (click)="back()" title="Go back">◄</button>
+        <span class="headerText">Maintainance Tasks</span>
+    </div>
+    <button title="Click to add a new maintainance task" (click)="addEditTaskComponent.closeEditMode()">Add New Task</button>
+</div>
+<div class="main">
+    <app-left-header-panel [data]="leftPanelData" [activeItemId]="activeItemId"
+        (activeItemChanged)="setActiveId($event)"></app-left-header-panel>
+
+    @if (this.activeItemId == 0) {
+        <app-tasks-listing (editTaskClicked)="initEditMode($event)"></app-tasks-listing>
+    } @else if (this.activeItemId == 1) {
+        <app-tasks-listing [filterPending]="true" (editTaskClicked)="initEditMode($event)"></app-tasks-listing>
+    } @else if (this.activeItemId == 2) {
+        <app-tasks-listing [filterCompleted]="true" (editTaskClicked)="initEditMode($event)"></app-tasks-listing>
+    } @else if (this.activeItemId == 3) {
+        <app-add-edit-task [editTaskId]="editTaskId" (closeEdit)="closeEditMode($event)"></app-add-edit-task>
+    }
+</div>

@@ -1,0 +1,12 @@
+<div class="left-header-panel">
+    @for (item of data; track $index) {
+        <div class="left-header-item" [ngClass]="{'active-item': item.id == activeItemId}" (click)=setActiveItemId($index) [title]="item.tooltip">
+            <div>
+                {{ item.primaryLabel }}
+                <span *ngIf="$index == activeItemId">►</span>
+            </div>
+            <div> {{ item.secondaryLabel }} </div>
+        </div>
+    } @empty {
+        <h1>Oops..Something Went Wrong!</h1>
+    }

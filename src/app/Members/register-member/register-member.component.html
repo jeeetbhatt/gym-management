@@ -1,0 +1,66 @@
+<div class="add-member-form">
+    <div class="header">
+        <span class="header-text">New User Registration</span>
+        <input type="checkbox" name="add-multiple" id="addMultipleCB" (ngmodel)="addMultiple" (change)="addMultiple = !addMultiple">
+        <label for="addMultipleCB">Add Multiple</label>
+    </div>
+    <div class="main">
+        @if (!addMultiple) {
+            <form #registerMemberform="ngForm" (ngSubmit)="registerSingleMember(registerMemberform)">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" ngModel required placeholder="Enter your full name"><br>
+            
+                <label for="contactNumber">Whatsapp Number</label>
+                <input type="text" id="contactNumber" name="contactNumber" ngModel required placeholder="Enter your WhatsApp number"><br>
+            
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" ngModel required placeholder="Enter your address"><br>
+            
+                <label for="physiqueGoal">Physique Goal</label>
+                <select id="physiqueGoal" name="physiqueGoal" ngModel>
+                    <option value="Fat Loss">Fat Loss</option>
+                    <option value="Weight Gain">Weight Gain</option>
+                    <option value="Body Building">Body Building</option>
+                </select><br>
+            
+                <label for="expertiseLevel">Expertise Level</label>
+                <select id="expertiseLevel" name="expertiseLevel" ngModel>
+                    <option value="Learner">Learner</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Expert">Expert</option>
+                </select><br>
+            
+                <label for="trainer">Designated Trainer</label>
+                <select id="trainer" name="trainer" ngModel>
+                    <option *ngFor="let item of getTrainers(); let i = index" [value]="item.name">{{ item.name | titlecase }}</option>
+                </select><br>
+            
+                <label for="joiningDate">Joining Date</label>
+                <input type="date" id="joiningDate" name="joiningDate" [(ngModel)]="subscriptionStartDate" (input)="subscriptionSelected()" required><br>
+            
+                <label for="numberOfMembers">Number of Month(s)</label>
+                <input type="number" id="subscriptionMonth" name="subscriptionMonth" min="1" max="50" [(ngModel)]="subscriptionMonth" (input)="subscriptionSelected()" placeholder="Enter number of months"><br>
+            
+                <label for="exDate">Subscription Expiry Date</label>
+                <input type="date" id="exDate" name="exDate" [(ngModel)]="subscriptionEndDate" ngModel required disabled><br>
+            
+                <label for="paymentRemark">Payment Remarks</label>
+                <input type="text" id="paymentRemark" name="paymentRemark" ngModel required placeholder="Enter payment remarks"><br>
+            
+                <label for="remarks">Remarks</label>
+                <input type="text" id="remarks" name="remarks" ngModel placeholder="Enter any additional remarks"><br>
+            
+                <button type="submit" title="Click to register a member" [disabled]="!registerMemberform.valid">Register</button>
+            </form>
+            
+            
+        } @else {
+            <div class="multi-add-form">
+                <span>Register Multiple Members</span>
+                <input type="number" min="1" max="50" [(ngModel)]="numberOfMembers" />
+                <button (click)="registerMultipleMembers()">Go</button>
+            </div>
+        }
+    </div>
+</div>

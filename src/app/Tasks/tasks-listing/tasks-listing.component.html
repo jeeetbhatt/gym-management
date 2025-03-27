@@ -1,0 +1,32 @@
+<div class="all-tasks-listing">
+    <div class="header" [title]="this.taskData.length+ ' Members'">
+        <h3>All Tasks - {{ this.taskData.length }} </h3>
+    </div>
+
+    <div class="main">
+        <div class="task-container">
+            @for (item of this.taskData; track $index) {
+            <div class="task-card">
+                <div style="display: flex; padding-bottom: 5px; border-bottom: 1px solid; font-weight: 600;">
+                    <span *ngIf="item.highPriority" class="important"  title="This is a High Priority Task"> ! </span>
+                    <span>{{ item.taskDesc }}</span>
+                </div>
+                <span>Due Date: {{ item.dueDate }}</span>
+                <span>Status: {{ item.status }}</span>
+                <span>Created On: {{ item.creationDate }}</span>
+                <div class="controls">
+                    <button (click)="editTask(item.id)" title="Click here to edit the task">Edit</button>
+                    @if (item.status === 'Pending') {
+                        <button title="⚠️ Click here to make the card as Completed" (click)="changeStatus(item.id)">Mark as Completed</button>
+                    } @else {
+                        <button title="⚠️ Click here to make the card as Pending" (click)="changeStatus(item.id)">Mark as Pending</button>
+                    }
+                </div>
+            </div>
+            } @empty {
+                <h1>No Tasks Found.</h1>
+            }
+
+        </div>
+    </div>
+</div>

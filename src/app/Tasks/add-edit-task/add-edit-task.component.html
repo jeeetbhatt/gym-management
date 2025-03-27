@@ -1,0 +1,31 @@
+<div class="add-edit-task">
+
+    <div class="header">
+        <div class="header-text">
+            <span>{{ editTaskId == -1 ? "Add New Task" : "Edit Task" }}</span>
+        </div>
+        <button (click)="closeEditMode()" title="Close edit">X</button>
+    </div>
+
+    <div class="main">
+        <form #addEditTaskForm="ngForm" (ngSubmit)="onSubmit(addEditTaskForm)">
+            <label for="taskDesc">Task Description</label>
+            <input type="text" name="taskDesc" id="taskDesc" ngModel required placeholder="Enter task description" [(ngModel)]="editTaskData.taskDesc"><br>
+
+            <label for="dueDate">Due Date</label>
+            <input type="date" name="dueDate" id="dueDate" ngModel [(ngModel)]="editTaskData.dueDate"> required><br>
+
+            <input type="checkbox" name="highPriority" id="highPriority" ngModel [(ngModel)]="editTaskData.highPriority">
+            <label for="highPriority">High Priority</label><br>
+
+            <label for="status" >Status</label>
+            <select name="status" id="status" ngModel [(ngModel)]="editTaskData.status">
+                <option value="Pending" selected>Pending</option>
+                <option value="Completed">Completed</option>
+            </select><br>
+
+            <button type="submit" title="Click to add/edit the task" [disabled]="!addEditTaskForm.valid">{{ editTaskId == -1 ? "Add" : "Edit" }}</button>
+        </form>
+
+    </div>
+</div>
